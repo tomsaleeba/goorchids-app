@@ -43,6 +43,7 @@ EOF
 fi
 
 if [ "$(uname -s)" == "Linux" ] &&
+    # FIXME remove hardcoding of postgresql version (the 9.5)
     ! echo '#include <postgresql/9.5/utils/errcodes.h>' |cc -E - >/dev/null 2>&1 &&
     ! echo '#include <postgresql/9.5/server/utils/errcodes.h>' |cc -E - >/dev/null 2>&1
 then
@@ -64,6 +65,20 @@ then
 Error: The "libmemcached" library headers need to be installed on your system.
 
        Ubuntu Linux:        sudo apt-get install libmemcached-dev
+
+EOF
+    exit 1
+fi
+
+which java > /dev/null 2>&1
+java_rc=$?
+if [ "$java_rc" != "0" ]
+then
+    cat <<EOF
+
+Error: Cannot find the "java" command, you need to install Java.
+
+       Ubuntu Linux:        sudo apt-get install default-jre
 
 EOF
     exit 1
