@@ -85,7 +85,7 @@ STATICFILES_DIRS = [
     os.path.join(os.path.dirname(__file__), '..', 'external', 'gobotany-app', 'gobotany', 'static'),
 ]
 
-INSTALLED_APPS.remove('gobotany.plantshare')
+# INSTALLED_APPS.remove('gobotany.plantshare') # this causes quite a few RemovedInDjango19Warning messages in the logs because other apps (search and site) still use plantshare
 # INSTALLED_APPS.remove('facebook_connect')
 INSTALLED_APPS.remove('captcha')
 
